@@ -1,0 +1,36 @@
+<!doctype html>
+<head>
+</head>
+<body>
+
+<form  method="post" action="">
+Donnez note de DC1 : <input type="number" name="DC1" id="DC1">
+Donnez coef de DC1 : <input type="number" name="coef1" id="coef1">
+<br><br>
+Donnez note de DC2 : <input type="number" name="DC2" id="DC2">
+Donnez coef de DC2 : <input type="number" name="coef2" id="coef2">
+<br><br>
+Donnez note de DS : <input type="number" name="DS" id="DS">
+Donnez coef de DS : <input type="number" name="coef3" id="coef3">
+<br><br>
+<button id="myBtn">calculer</button>
+</form>
+
+<script>
+
+ var DC1 = document.getElementById('DC1');
+var coef1 = document.getElementById('coef1');
+
+var DC2 = document.getElementById('DC2');
+var coef2 = document.getElementById('coef2');
+
+var DS = document.getElementById('DS');
+var coef3 = document.getElementById('coef3');
+document.getElementById("myBtn").addEventListener("click", function() {
+ document.write("Votre moyenne est ",( parseInt(DC1.value)*parseInt(coef1.value)+parseInt(DC2.value)*parseInt(coef2.value)+parseInt(DS.value)*parseInt(coef3.value) )/( parseInt(coef1.value)+parseInt(coef2.value)+parseInt(coef3.value) ) );
+ });
+</script>
+
+
+</body>
+</html>

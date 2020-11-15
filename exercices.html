@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<head>
+<title>Applications</title>
+ <meta charset="utf-8" />
+<script src="jquery-2.1.4.min.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="jquery.js"></script>
+<style>
+#conteneur{
+  position: relative;
+  height:485px;
+  width:331px;
+  margin:0 auto ;
+}
+#conteneur img {
+  position:absolute;
+  left:0;
+}
+#conteneur img.image_de_dessus:hover{
+  animation-name : fondu-in-out;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-duration: 3s;
+  animation-direction: alternate;
+}
+@keyframes fondu-in-out {
+  0% { opacity: 1;}
+  25% {opacity: 1;}
+  75% {opacity: 0;}
+  100% {opacity: 0;}
+  
+}
+</style>
+</head>
+ <body>
+ 
+<p> exercice 1 </p> <br>
+   <button id="btn1">ex1</button>
+    <h2 id="monelement" style="display:none">#monelement</h2>
+   
+   
+<p> exercice 2 </p> <br>
+    <span class='ma_classe'>-- Mon premier span ma_classe --</span><br>
+    <span class='ma_classe'>-- Mon deuxième span ma_classe --</span>
+    <div id="mon_div" style="border:1px solid gray"> Ce DIV est initialement dans le DOM en fin de fichier </div>
+    <button id="btn2">ex2</button>
+
+<p> exercice 3 </p> <br>
+<form>
+    <textarea id="mon_textarea"> Mon texte ici </textarea><br>
+    <input type="button" value="ex3" id="afficher_texte"/>
+</form>
+ <p> exercice 4 </p> <br>
+
+<form> <input type="texte" id="no_paste" /></form>
+
+ <p> exercice 5 </p> <br>
+
+ <form>
+  <input type='text' name='cache-texte' class='only_alpha_num' id="nonly_alpha_num"/>
+</form>
+
+<p> exercice 6 </p> <br>
+
+<img id="mon_image" src="image2.jpg" alt="survolez cette image "/>
+
+<p> exercice 7 </p> <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ <input id="moncalendrier" type="datepicker"  name="moncalendrier" value="04/10/2020"/>
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<p> exercice 8 </p> <br>
+<div id='conteneur'>
+<img src="image1.jpg" />
+<img class='image_de_dessus' src="image2.jpg" />
+</div>
+<p> exercice 9 </p> <br>
+
+<a class="ex9">
+  <img src="image1.jpg" alt ="effet sur survol de l'image"/>
+</a>
+
+<p> exercice 10 </p> <br>
+ 
+ <h2 id="id_de_mon_element">cliquer içi</h2>
+<button id="btn7">ex10</button>
+<p> exercice 11 </p> <br>
+<div id="bgi"></div>
+<button id="btn3">ex11</button>
+
+
+<p> exercice 12 </p> <br>
+
+<div class="maclassegenerale "> mon 1</div>
+<div class="maclassegenerale maclasseaexclure"> mon 2</div>
+<div class="maclassegenerale"> mon 3</div>
+<div class="maclassegenerale maclasseaexclure"> mon 4</div>
+
+<p> exercice 13 </p> <br>
+
+<button id="btn4">ex13</button>
+
+
+<p> exercice 14 </p> <br>
+
+<div id="monDiv1" style="height:500px;"></div>
+<div id="monDiv2" style="margin-top:200px;"></div>
+<button id="btn5">ex14</button>
+
+
+<p> exercice 15 </p> <br>
+<textarea class="elementtextarea"></textarea>
+
+
+
+<p> exercice 30 </p> <br>
+<img id="img30" src="image1.jpg"/>
+<button id="btn6">ex30</button>
+<script>
+
+
+   $(document).ready(
+        function(){
+                     $("#btn1").click(function(){
+                     if ($("#monelement").is(":visible")) alert ("#monelement est visible");
+                     if ($("#monelement").is(":hidden")) alert ("#monelement est caché");
+                     });
+                  
+
+       
+                     $("#btn2").click(function(){
+                      $("<p>!Je suis les éléments de classe ma_classe!</p>").insertAfter('.ma_classe');
+                      $("span").insertAfter('#mon_div');
+                      $("<p>Un petit texte à insérer dans le DOM juste avant mon_div</p>").insertBefore('#mon_div');
+                     });
+
+                      $("#afficher_texte").click(function(){
+                              alert ("Le texte contenu dans le textarea est " + $("#mon_textarea").val());
+                       });
+
+                    $('#no_paste').bind('paste copy cut', function(e) {
+                                e.preventDefault();
+                                 alert("copy/paste/cut forbidden");
+                     });
+
+                     $('.only_alpha_num').keyup(function(){       
+                            if(!$(this).val().match(/^[0-9a-z]*$/i)){
+                                 var str=$(this).val().slice(0, -1);
+                                 $(this).val(str);
+                            }               
+                     });
+                    
+                    $("#mon_image").hover(
+                                        function () {
+                                          $(this).attr('src','image1.jpg');  
+                                         },
+                                        function () {
+                                          $(this).attr('src','image2.jpg');  
+                                        }
+                     ); 
+
+                    $( "#moncalendrier" ).datepicker ({});
+                    $('#moncalendrier').focus();
+
+
+                          
+                    $('.ex9').hover(
+                        function(){ $(this).animate({ opacity : '.75' }); },
+                        function(){ $(this).animate({ opacity : '1' }); }
+                     );
+
+
+                    $("#btn7").click(function(){
+                     $('html').click(function(event){
+                                   if(event.target.id == 'id_de_mon_element') {
+                                    alert ("j'ai cliqué sur mon élément");
+                                    } else {
+                                    alert ("j'ai cliqué à l'extérieur de mon élément");
+                                    }
+                                });
+                      });
+
+
+                    $('.maclassegenerale').not(".maclasseaexclure").css({"background":"url(image1.png)  no-repeat 5px 5px"});
+
+                    $("#btn4").click(function(){
+                              alert ("Nombre d'élément possédant une classe définie " + $(".maclasseaexclure").length);
+                       });
+
+                    $("#btn5").click(function(){
+                                var x1=parseInt($("#monDiv1").css('height'));
+                                var x2=parseInt($("#monDiv2").css('margin-top'));
+                                var x3=x1-x2;
+                              alert ("valeur = "+ x3 );
+                       });
+                    
+                    $(".elementtextarea").attr('readonly','readonly');
+
+                    $("#btn6").click(function(){
+                       function FaireClignoterImage (){ $("#img30").fadeOut(200).delay(300).fadeIn(200); } 
+                        setInterval(FaireClignoterImage,700); 
+
+                     });
+
+                 
+            }
+    );
+   </script>
+
+ </body>
+</html>

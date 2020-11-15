@@ -1,0 +1,26 @@
+<!doctype html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+ <style>
+    
+ </style>
+</head>
+<body>
+ 
+<script>
+    $(document).ready(function(){
+  if(typeof sessionStorage!='undefined') {
+    if('first_name' in sessionStorage) {
+      var x = sessionStorage.getItem('first_name');
+      alert("Message récupéré "+ x);
+    }
+    else {
+        alert("first name non def");
+    }
+  } else {
+    alert("sessionStorage n'est pas supporté");
+  }  
+  });
+</script>
+</body>
+</html>

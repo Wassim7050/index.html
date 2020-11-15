@@ -1,0 +1,136 @@
+<!doctype html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="./jQueryAssets/jquery-1.11.1.min.js"></script>
+
+<link href="style.css" rel="stylesheet" type="text/css">
+	
+</head>
+
+<body>
+	
+    <div class="container">
+    	<h2>To Do List</h2>
+    
+<form id="formulaire">
+			
+	<label for="titre_tache">Titre de t�che:</label>
+			<input type="text" id="titre_tache">
+			<label for="date_tache">Date </label>
+		        <input type="date" id="date_tache">
+			<label for="texte">Description</label>
+		        <textarea id="descript"></textarea>
+	<label for="etat_tache">Importance</label>
+	
+	<input type="range" id="etat_tache"   >
+
+ 
+	<input type="button" id="submitBtn" value="Ajouter"/>
+	<input type="button" id="initBtn" value="SupprimerTT"/>
+	  </form>
+    
+			<br/>
+	      
+      <table border=2 id="tacheListe">
+	 
+	</table> 
+    
+    </div>
+</body>
+	
+ 
+</html>
+
+<script>
+$(document).ready(function(){
+
+	var nbDelete = [];
+
+   $("#initBtn").click(function(){ 
+	   
+	   if (localStorage.TodoListe)
+	   {
+		alert(" vous allez Tout initialise :" + localStorage.TodoListe);
+				localStorage.clear();//effacer tout le contenu de localStorage
+				sessionStorage.clear()//effacer tout le contenu de SessionStorage
+				$('table').html("");  }   // supprimer le contenue de la table
+   });
+	
+  
+   $("#submitBtn").click(function(){        
+
+        var Todo={titre:"", desc:"", date:"", importance:0}; 
+        // initialisation de l'Objet Todo 
+	
+		Todo.titre = $("#titre_tache").val();
+		Todo.desc = $("#descript").val();
+		Todo.date = $("#date_tache").val();
+		Todo.importance = parseInt($("#etat_tache").val());
+	 	
+		if (!localStorage.TodoListe)
+			{	
+				var TodoListe_Tab = [];// d�finition du tableau TodoListe_Tab
+				TodoListe_Tab.push(Todo);// Ajouter Todo au tableau TodoListe_Tab
+				//On place le tableau en m�moire en transformant le JSON en chaine de caracteres
+				localStorage.TodoListe = JSON.stringify(TodoListe_Tab);
+	
+			}
+		else 
+	      {     
+	            var recupTodoListe=JSON.parse(localStorage.TodoListe); // recuperer la chaine TodoListe sauvegard� et la retransforme en tableau
+		    var TodoListe_Tab=recupTodoListe.splice(0);//permet de cr�er une copie d'un array � partir d'indice 0 
+			TodoListe_Tab.push(Todo);// Ajouter Todo au tableau TodoListe_Tab
+
+			//On replace le tableau en m�moire en transformant le JSON en chaine de caracteres
+
+			localStorage.TodoListe = JSON.stringify(TodoListe_Tab);
+	       }
+		$('table').html(""); // suprimer le contenue de la table 
+
+		for (var i = 0; i < TodoListe_Tab.length; i++) {
+				// Cr�er les lignes dans la table pour chaque tache
+				$('table').append(`
+				<tr id="tr_${i}">
+					<td><input type="checkbox" id="tacheFinalisee_${i}" class="tacheFinalisee"/></td>
+					<td>${TodoListe_Tab[i].titre}</td>
+					<td>${TodoListe_Tab[i].date}</td>
+					<td>${TodoListe_Tab[i].desc}</td>
+					<td>${TodoListe_Tab[i].importance}</td>
+					<td><input type="button" id="deleteTache_${i}" class="deleteTache" value="Delete"/></td>
+				</tr>`);
+				}			
+				
+	
+			$(".deleteTache").click(function(){
+				var index = new String(this.id).split("_")[1];
+				var offset = 0;
+				for (var e in nbDelete) {
+					offset += (e < index) ? 1 : 0;
+				}
+				var realIndex = index - offset;
+				var array = JSON.parse(localStorage.TodoListe);
+				array.splice(realIndex, 1);
+				localStorage.TodoListe = JSON.stringify(array);
+				$(`#tr_${index}`).remove();
+				nbDelete.push(index);
+			});
+
+			$("#formulaire").trigger("reset");
+
+			$(".tacheFinalisee").change(function() {
+				var index = new String(this.id).split("_")[1];
+				if($(this).prop("checked")) {
+					$(`#tr_${index}`).removeClass("black");
+					$(`#tr_${index}`).addClass("green");
+				} else {
+					$(`#tr_${index}`).removeClass("green");
+					$(`#tr_${index}`).addClass("black");
+				}
+			})
+		
+
+    });
+
+});
+
+</script>

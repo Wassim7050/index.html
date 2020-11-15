@@ -1,0 +1,29 @@
+<!doctype html>
+<head>
+</head>
+<body>
+
+<script>
+
+function calcul(frm)
+{
+var somme=parseInt(frm.DC1.value)*parseInt(frm.coef1.value)+parseInt(frm.DC2.value)*parseInt(frm.coef2.value)+parseInt(frm.DS.value)*parseInt(frm.coef3.value)
+var moy=somme/(parseInt(frm.coef1.value)+parseInt(frm.coef2.value)+parseInt(frm.coef3.value));
+document.write("Votre moyenne est ",moy);
+}
+</script>
+<form>
+Donnez note de DC1 : <input type="number" name="DC1">
+Donnez coef de DC1 : <input type="number" name="coef1">
+<br><br>
+Donnez note de DC2 : <input type="number" name="DC2">
+Donnez coef de DC2 : <input type="number" name="coef2">
+<br><br>
+Donnez note de DS : <input type="number" name="DS">
+Donnez coef de DS : <input type="number" name="coef3">
+<br><br>
+<input type="button" value="calculer" onclick="calcul(this.form)">
+</form>
+
+</body>
+</html>

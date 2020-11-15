@@ -1,0 +1,79 @@
+<!doctype html>
+<head>
+ <style>
+  div.one {
+
+  width: 500px;
+  border: 1px solid black;
+  padding: 50px;
+  margin: 50px 500px 100px 500px;
+  background-color:#FFC0CB;
+  }
+ 
+   
+ </style>
+</head>
+<body>
+<div class="one">
+<h2 align="center"> Inscription </h2>
+  <form method="post" action=""  id="myForm">
+          
+                 <label for="pseudo">Nom et Prenom *:</label>
+                 <input type="text" name="pseudo" id="pseudo" required />
+                 <br>
+                 <br>
+                 <label for="CIN">CIN *:</label>
+                 <input type="text" name="CIN" id="CIN" required pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"/>
+                 <br>
+                 <br>
+                 <label for="mail">Adresse e-mail *:</label>
+                 <input type="mail" name="mail" id="mail" required  pattern=".+@.+" size="30" />
+                 <br>
+                 <br>
+                 <label for="radio">Niveau :</label>
+             
+                    <input type="radio" id="Secondaire" name="X" value="Secondaire" checked="checked">
+                    <label for="Secondaire" >Secondaire</label>
+                    <input type="radio" id="Universitaire" name="X" value="Universitaire">
+                    <label for="Universitaire">Universitaire</label>
+                    <input type="radio" id="Autre" name="X" value="Autre">
+                    <label for="Autre">Autre</label>
+
+                  <br>
+                  <br>
+                 <label for="SELECT">Module de formation :</label>
+                    <SELECT NAME="module" multiple="oui" maximum="2">
+                         <OPTION> Bureantique
+                         <OPTION> SE et réseaux info
+                         <OPTION> TIC
+                    </SELECT>
+                                      <br>
+                  <br>
+
+
+                 <br>
+                 <br>
+                 <p style="text-align:right;"> (*): obligatoire </p>
+                 <br>
+                 <br>
+                 <div style="text-align:center;">
+                 <input type="submit" value="Envoyer"  />
+                 <input type="reset" value="Annuler"  />
+                 </div>
+
+  </form>
+  <script>
+      var myForm = document.getElementById('myForm');
+          myForm.addEventListener('submit', function(e) {
+            alert("Inscription achevée !");
+            e.preventDefault();
+          }, true);
+
+          myForm.addEventListener('reset', function(e) {
+          alert('Vous avez réinitialisé le formulaire !');
+          }, true);
+</script>
+
+</div>
+</body>
+</html>

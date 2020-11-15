@@ -1,0 +1,37 @@
+<!doctype html>
+<head>
+</head>
+<body>
+
+<script>
+
+function calcul(frm)
+{
+var lm = [1,3,5,7,8,10,12];
+var sm =[4,6,8,11];
+var nd="";
+if (lm.includes(parseInt(frm.mois.value)) ) {
+    nd="nombre de jours est 31";
+}
+if (sm.includes(parseInt(frm.mois.value)) ) {
+    nd="nombre de jours est 30";
+}
+if (parseInt(frm.mois.value)==2){
+    if(parseInt(frm.annee.value) %4 == 0){ nd="nombre de jours est 29"}
+    else{
+       nd="nombre de jours est 28" 
+    }
+}
+document.write(nd);
+}
+</script>
+<form>
+Donnez num de mois : <input type="number" name="mois" min="1" max="12">
+Donnez l'annee : <input type="number" name="annee">
+
+<br><br>
+<input type="button" value="Affiche nombre de jours" onclick="calcul(this.form)">
+</form>
+
+</body>
+</html>

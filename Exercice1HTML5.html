@@ -1,0 +1,122 @@
+<!doctype html>
+<head>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+ <style>
+  div.one {
+
+  width: 500px;
+  border: 1px solid black;
+  padding: 50px;
+  margin: 50px 500px 100px 500px;
+  background-color:white;
+  }
+ 
+   
+ </style>
+</head>
+<body>
+<div class="one">
+<h2 > Contact </h2>
+<p> Be called back for more information</p>
+  <form method="post" action="test.html"  id="myForm">
+          
+                 <label for="first_name">First name (*) </label>
+<input type="text" name="first_name" id="first_name" oninput="sessionStorage.setItem('first_name', this.value);" autocomplete="on" required />
+                 <br>
+                 <br>
+                 <label for="last_name">Last name (*) </label>
+                 <input type="text" name="last_name" id="last_name" autocomplete="on" required />
+                 <br>
+                 <br>               
+                 <label for="SELECT">You want to be<br> contacted by :</label>
+                    <SELECT NAME="module">
+                         <OPTION> phone
+                         <OPTION> E-mail
+                         <OPTION> Facebook
+                    </SELECT>
+                  <br>
+                  <br>
+                  <label for="last_name">Phone number </label>
+                  <input type="text" name="last_name" id="last_name" />
+                  <br>
+                  <br>
+                  <label for="date">When (*) </label>
+                  <input type="date" name="date" id="date"  />
+
+                  <br>
+                  <br>
+                  <label for="time">Between (*) </label>
+                  <input type="time" name="time" id="time" />
+                  <span>and </span>
+                  <input type="time" name="time2" id="time2"  />
+
+  
+                 <br>
+                 <br>
+                 <div style="text-align:right;">
+                 <input type="submit" value="submit"  />
+                 </div>
+                 <input type="reset" value="cancel"  />
+
+  </form>
+  <br>
+
+  <p>Vous avez vu cette page <span id="visites"></span> fois</p>
+
+  <br>
+  <button id = "find-me">Montrer ma localisation</button><br/>
+  <p id = "status"></p>
+  <a id = "map-link" target="_blank"></a>
+</div>
+<script>
+ $(document).ready(function(){
+  if(typeof localStorage!='undefined') {
+    var nbvisites = localStorage.getItem('visites');
+    if(nbvisites!=null) {
+      nbvisites = parseInt(nbvisites);
+    } else {
+      nbvisites = 1;
+    }
+    nbvisites++;
+    localStorage.setItem('visites',nbvisites);
+    x = sessionStorage.getItem('first_name');
+    $(first_name).val(x);
+    document.getElementById('visites').innerHTML = nbvisites;
+    if(x != null ) alert("Bonjour mr "+ x + " vous avez visité cette page "+nbvisites+" fois ");
+
+  } else {
+    alert("localStorage n'est pas supporté");
+  }
+  $("#find-me").click(function(){
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+
+        mapLink.href = '';
+        mapLink.textContent = '';
+
+        function success(position) {
+          const latitude  = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          status.textContent = '';
+          mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+          mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+        }
+
+        function error() {
+          status.textContent = 'Unable to retrieve your location';
+        }
+
+        if (!navigator.geolocation) {
+          status.textContent = 'Geolocation is not supported by your browser';
+        } else {
+          status.textContent = 'Locating…';
+          navigator.geolocation.getCurrentPosition(success, error);
+        }
+  });
+});
+</script>
+</body>
+</html>

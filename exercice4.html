@@ -1,0 +1,27 @@
+<!doctype html>
+<head>
+</head>
+<body>
+
+<script>
+
+function calcul(frm)
+{
+    var res=eval(frm.op.value);
+document.getElementById('resultat').value=res;
+
+}
+</script>
+
+
+<form action="afficher.html">
+Donnez  opération : <input type="text" name="op"/>
+<br>
+
+<input type="button" value="=" onclick="calcul(this.form)">
+<input type="text" id="resultat"/>
+<a href="#" onclick="calcul(this)">Afficher le résultat</a>
+</form>
+
+</body>
+</html>

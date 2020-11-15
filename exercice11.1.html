@@ -1,0 +1,21 @@
+<!doctype html>
+<head>
+</head>
+<body>
+
+<div><p id="myP">Un peu de texte <a>et un lien : </a></p></div>
+<script>
+var newLink = document.createElement('a');
+newLink.id = 'sdz_link';
+newLink.href = 'http://google.com/';
+newLink.title = 'Découvrez Google';
+newLink.setAttribute('tabindex', '10');
+document.getElementById('myP').appendChild(newLink); 
+var newLinkText = document.createTextNode("Google");
+newLink.appendChild(newLinkText); 
+</script>
+
+
+
+</body>
+</html>
